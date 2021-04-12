@@ -23,19 +23,28 @@ void menu (){
         switch (choice)
         {
         case 1:
+            
             printf("\nPlease, input file name: \n");
+            file[0] = '\0';
+            FileWithPath[22] = '\0';
             scanf("%s",file);
             strcat(file,extension); 
             strcat(FileWithPath,file); 
+
+            printf("entrou\n")   ; 
+
             matrixLab = loadFile(FileWithPath,&line,&columns,&keys);     
-            if(matrixLab != NULL)    
+            if(matrixLab != NULL) {  
                 loaded = T;
+            }
             
             #if DEBUG
                 printf("%d\n",loaded);
-                printf("%s\n",file);  
+                printf("%s\n",file); 
             #endif 
             //show_maze(matrixLab,line,columns);
+            
+            
                     
             break;
             
@@ -58,10 +67,11 @@ void menu (){
         default:
             break;
         }
-    }while (choice == 1 || choice==2); 
+    }while ((choice == 1) || (choice ==2)); 
              
 }
-int **loadFile(char *file, int *Pline , int *Pcolumn, int *Pkeys ){       
+int **loadFile(char *file, int *Pline , int *Pcolumn, int *Pkeys ){  
+     
     int line , column, keys; 
     char EntireLine[128];  
     char *source;  
@@ -97,6 +107,8 @@ int **loadFile(char *file, int *Pline , int *Pcolumn, int *Pkeys ){
         } 
         i++; 
     } 
+    fclose(fp); 
+    
 #if DEBUG 
     for(i = 1; i < line; i++){
         for ( j = 0; j < column; j++){
@@ -106,7 +118,7 @@ int **loadFile(char *file, int *Pline , int *Pcolumn, int *Pkeys ){
     } 
 #endif 
 
-    fclose(fp); 
+    
  
      
     *Pline = line; 
